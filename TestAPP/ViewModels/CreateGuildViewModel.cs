@@ -78,7 +78,7 @@ namespace TestAPP.ViewModels
                 name = Name,
                 location = Location,
                 description = Description,
-                equipment = SelectedEquipment,
+                equipment = "test",
                 isPrivate = IsPrivate,
                 password = IsPrivate ? Password : null,
                 members = Members,
@@ -90,6 +90,8 @@ namespace TestAPP.ViewModels
             if (success)
             {
                 await Application.Current.MainPage.DisplayAlert("Success", "Guild created successfully!", "OK");
+                await Application.Current.MainPage.Navigation.PopAsync();
+
             }
             else
             {

@@ -67,8 +67,7 @@
                                FontFamily="FredokaOne"
                                TextColor="#082C56"
                                BackgroundColor="Transparent"
-                               InputTransparent="True"
-                               Keyboard="Text"
+                            
                                HorizontalOptions="FillAndExpand"/>
                     </Frame>
 
