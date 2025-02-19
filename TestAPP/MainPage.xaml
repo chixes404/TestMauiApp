@@ -1,0 +1,244 @@
+﻿<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:syncfusion="clr-namespace:Syncfusion.Maui.Cards;assembly=Syncfusion.Maui.Cards"
+             xmlns:local="clr-namespace:TestAPP.Converter"
+
+             x:Class="TestAPP.MainPage"
+             xmlns:vm="clr-namespace:TestAPP.ViewModels"
+             Background="{StaticResource PageBackgroundGradient}">
+
+
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <LinearGradientBrush x:Key="PageBackgroundGradient" StartPoint="0,0" EndPoint="0,1">
+                <GradientStop Color="#FFFFFF" Offset="0.0"/>
+                <GradientStop Color="#E7F0F5" Offset="1.0"/>
+            </LinearGradientBrush>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.BindingContext>
+        <vm:UserGuildsViewModel />
+    </ContentPage.BindingContext>
+
+    <ScrollView>
+        <VerticalStackLayout Padding="25" Spacing="10">
+
+
+            
+
+            <!-- Header -->
+            <Label Text="Guilds" 
+                   FontSize="24" 
+                   
+                   FontFamily="FredokaOne"  
+                   HorizontalOptions="Center" 
+                   TextColor="#082C56" />
+
+            <!-- Create New Guild Section -->
+            <Frame x:Name="CreateGuildFrame" 
+       BorderColor="#9EA8AC" 
+       WidthRequest="280" 
+       CornerRadius="25" 
+       Padding="15" 
+       BackgroundColor="Transparent">
+
+                <HorizontalStackLayout Spacing="100" HorizontalOptions="Center">
+                    <!-- Text -->
+                    <Label Text="Create New Guild"
+               FontSize="14"
+               FontFamily="FredokaOne"
+               TextColor="#082C56"
+               VerticalOptions="Center"/>
+
+                    <!-- Plus Icon -->
+                    <Label Text="&#xf067;"  
+               FontSize="20"
+               FontFamily="FontAwesome"
+               TextColor="#082C56"
+               VerticalOptions="Center"/>
+                </HorizontalStackLayout>
+            </Frame>
+
+
+            <!-- Your Guilds Section -->
+            <Label Text="Your Guilds"
+                   FontSize="12"
+                   LineHeight="32"
+                   
+                   FontFamily="FredokaOne"
+                   TextColor="#082C56" 
+                   Margin="0,10,0,5"/>
+
+            <CollectionView ItemsSource="{Binding YourGuilds}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <syncfusion:SfCardView Padding="10" BackgroundColor="White" CornerRadius="20" Margin="0,5,0,5">
+                            <VerticalStackLayout Spacing="20">
+                                <!-- Wrap the title section separately to control spacing -->
+                                <VerticalStackLayout Spacing="5">
+                                    <!-- Title and View More Button in the same row -->
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="Auto" />
+                                        </Grid.ColumnDefinitions>
+
+                                        <!-- Title -->
+                                        <Label Text="{Binding Name}" 
+                                   FontSize="12" 
+                                   FontFamily="FredokaOne" 
+                                   TextColor="#082C56" 
+                                   VerticalOptions="Center" 
+                                   Grid.Column="0" />
+
+                                        <!-- View More Button -->
+                                        <Label Text="View More" 
+                                   TextColor="#4BA8E0" 
+                                   FontSize="12" 
+                                   FontFamily="FredokaOne" 
+                                   HorizontalOptions="End" 
+                                   Margin="10,0,0,0" 
+                                   Grid.Column="1" />
+                                    </Grid>
+                                </VerticalStackLayout>
+
+                                <!-- Icon and Guild Details -->
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+
+                                    <!-- FontAwesome Icon (Adjust margin instead of stack spacing) -->
+                                    <Frame BorderColor="#D9D9D9" Padding="7" HorizontalOptions="End" BackgroundColor="#D9D9D9" HeightRequest="50" Margin="0,0,0,80" WidthRequest="50" Grid.Column="0"
+                               >
+                                        <!-- Reduced top margin -->
+                                        <Label Text="&#xf0c0;"  
+                                       HorizontalOptions="Center" 
+
+                                   FontSize="35"
+                                   FontFamily="FontAwesome"
+                                   BackgroundColor="#D9D9D9"
+                                   TextColor="#E5F0F5" />
+                                    </Frame>
+
+                                    <!-- Guild Details -->
+                                    <VerticalStackLayout Spacing="5" Grid.Column="1">
+                                        <Label Text="{Binding Members, StringFormat='    . Members: {0}'}"
+                                   FontSize="12" 
+                                   FontFamily="FredokaOne" 
+                                   TextColor="#4BA8E0" />
+                                        <Label Text="{Binding Rank, StringFormat='    . Rank: {0}'}"
+                                   FontSize="12" 
+                                   FontFamily="FredokaOne" 
+                                   TextColor="#4BA8E0" />
+                                        <Label Text="{Binding Location, StringFormat='    . Location: {0}'}"
+                                   FontSize="12" 
+                                   FontFamily="FredokaOne" 
+                                   TextColor="#4BA8E0" />
+                                        <Label Text="{Binding Equipment, StringFormat='    . Equipment: {0}'}"
+                                   FontSize="12" 
+                                   FontFamily="FredokaOne" 
+                                   TextColor="#4BA8E0" />
+                                        <Label Text="{Binding Description}" 
+                                   Margin="0,5,0,5"
+                                   FontSize="12" 
+                                   FontFamily="FredokaOne" 
+                                   TextColor="#4BA8E0" />
+                                    </VerticalStackLayout>
+                                </Grid>
+                            </VerticalStackLayout>
+                        </syncfusion:SfCardView>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+            <HorizontalStackLayout Spacing="130" Margin="0,10,0,5">
+                <Label Text="Recommended Guilds"
+           FontSize="12"
+           FontFamily="FredokaOne"
+           TextColor="#082C56"
+           VerticalOptions="Center"/>
+
+                <Label Text="Go to list" 
+       TextColor="#4BA8E0" 
+       FontSize="12" 
+       FontFamily="FredokaOne"
+       VerticalOptions="Center">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnGoToListTapped" />
+                    </Label.GestureRecognizers>
+                </Label>
+
+            </HorizontalStackLayout>
+
+            <CollectionView ItemsSource="{Binding RecommendedGuilds}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <syncfusion:SfCardView Padding="10" BackgroundColor="White" CornerRadius="20" Margin="0,5,0,5">
+                            <VerticalStackLayout>
+
+                                <!-- Title Row with Expand/Collapse Button -->
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+
+                                    <!-- Title -->
+                                    <Label Text="{Binding Name}" 
+                              FontSize="12" 
+FontFamily="FredokaOne"
+
+                               TextColor="#082C56" 
+                               VerticalOptions="Center" 
+                               Grid.Column="0" />
+
+                                    <!-- Expand/Collapse Button -->
+                                    <ImageButton 
+                            Source="{Binding IsExpanded, Converter={StaticResource BooleanToIconConverter}}" 
+                            Command="{Binding ToggleExpandCommand}"
+                            WidthRequest="24" 
+                            HeightRequest="24"
+                            Grid.Column="1"/>
+                                </Grid>
+
+                                <!-- Guild Details Section with Icon -->
+                                <Grid IsVisible="{Binding IsExpanded}">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+
+                                    <!-- User Icon -->
+                                    <Frame BorderColor="#D9D9D9" Padding="7" BackgroundColor="#D9D9D9" 
+                               HeightRequest="50" WidthRequest="50" Grid.Column="0" 
+                               HorizontalOptions="End" Margin="0,10,0,80">
+                                        <Label Text="&#xf0c0;"  
+                                   HorizontalOptions="Center" 
+                                   FontSize="35"
+                                   FontFamily="FontAwesome"
+                                   BackgroundColor="#D9D9D9"
+                                   TextColor="#E5F0F5" />
+                                    </Frame>
+
+                                    <!-- Guild Details -->
+                                    <VerticalStackLayout Grid.Column="1" Spacing="5" Padding="10">
+                                        <Label Text="{Binding Members, StringFormat='    . Members: {0}'}" FontFamily="FredokaOne" FontSize="12"  TextColor="#4BA8E0"/>
+                                        <Label Text="{Binding Rank, StringFormat='    . Rank: {0}'}" FontSize="12" FontFamily="FredokaOne" TextColor="#4BA8E0"/>
+                                        <Label Text="{Binding Location, StringFormat='    . Location: {0}'}" FontSize="12" FontFamily="FredokaOne" TextColor="#4BA8E0"/>
+                                        <Label Text="{Binding Equipment, StringFormat='    . Equipment: {0}'}" FontSize="12" FontFamily="FredokaOne" TextColor="#4BA8E0"/>
+                                        <Label Text="{Binding Description}" FontSize="12" FontFamily="FredokaOne" TextColor="#4BA8E0"/>
+                                    </VerticalStackLayout>
+                                </Grid>
+
+                            </VerticalStackLayout>
+                        </syncfusion:SfCardView>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>

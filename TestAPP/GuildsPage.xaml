@@ -1,0 +1,144 @@
+﻿<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:syncfusion="clr-namespace:Syncfusion.Maui.Cards;assembly=Syncfusion.Maui.Cards"
+             x:Class="TestAPP.GuildsPage"
+             xmlns:vm="clr-namespace:TestAPP.ViewModels"
+             Background="{StaticResource PageBackgroundGradient}">
+
+
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <LinearGradientBrush x:Key="PageBackgroundGradient" StartPoint="0,0" EndPoint="0,1">
+                <GradientStop Color="#FFFFFF" Offset="0.0"/>
+                <GradientStop Color="#E7F0F5" Offset="1.0"/>
+            </LinearGradientBrush>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+             
+    <ContentPage.BindingContext>
+        <vm:GuildsListViewModel />
+    </ContentPage.BindingContext>
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="15" >
+
+            <!-- Header -->
+            <Label Text="List of Guild"
+      FontSize="24"
+      FontFamily="FredokaOne"
+      TextColor="#082C56"
+      HorizontalOptions="Center"
+      VerticalOptions="Center"
+      Padding="10"/>
+
+
+
+            <!-- Create New Guild Section -->
+            <!-- Text -->
+            <Label Text="Filter by location"
+       FontSize="14"
+       FontFamily="FredokaOne"
+       TextColor="#4BA8E0"
+       HorizontalOptions="End">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding ShowLocationPopupCommand}" />
+                </Label.GestureRecognizers>
+            </Label>
+
+
+        
+
+            <CollectionView ItemsSource="{Binding Guilds}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <syncfusion:SfCardView Padding="10" BackgroundColor="White"  CornerRadius="15" Margin="0,5,0,5">
+                            <VerticalStackLayout Spacing="20">
+                                <!-- Wrap the title section separately to control spacing -->
+                                <VerticalStackLayout Spacing="5">
+                                    <!-- Title and View More Button in the same row -->
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="Auto" />
+                                        </Grid.ColumnDefinitions>
+
+                                        <!-- Title -->
+                                        <Label Text="{Binding Name}" 
+                                   FontSize="12" 
+                                   FontFamily="FredokaOne" 
+                                   TextColor="#082C56" 
+                                   VerticalOptions="Center" 
+                                   Grid.Column="0" />
+
+                                       
+                                    </Grid>
+                                </VerticalStackLayout>
+
+                                <!-- Icon and Guild Details -->
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+
+                                    <!-- FontAwesome Icon (Adjust margin instead of stack spacing) -->
+                                    <Frame BorderColor="#D9D9D9" Padding="7" HorizontalOptions="End" BackgroundColor="#D9D9D9" HeightRequest="50" Margin="0,0,0,80" WidthRequest="50" Grid.Column="0"
+                               >
+                                        <!-- Reduced top margin -->
+                                        <Label Text="&#xf0c0;"  
+                                       HorizontalOptions="Center" 
+
+                                   FontSize="35"
+                                   FontFamily="FontAwesome"
+                                   BackgroundColor="#D9D9D9"
+                                   TextColor="#E5F0F5" />
+                                    </Frame>
+
+                                    <!-- Guild Details -->
+                                    <VerticalStackLayout Spacing="5" Grid.Column="1">
+                                        <Label Text="{Binding Members, StringFormat='    . Members: {0}'}"
+                                   FontSize="12" 
+                                   FontFamily="FredokaOne" 
+                                   TextColor="#4BA8E0" />
+                                        <Label Text="{Binding Rank, StringFormat='    . Rank: {0}'}"
+                                   FontSize="12" 
+                                   FontFamily="FredokaOne" 
+                                   TextColor="#4BA8E0" />
+                                        <Label Text="{Binding Location, StringFormat='    . Location: {0}'}"
+                                   FontSize="12" 
+                                   FontFamily="FredokaOne" 
+                                   TextColor="#4BA8E0" />
+                                        <Label Text="{Binding Equipment, StringFormat='    . Equipment: {0}'}"
+                                   FontSize="12" 
+                                   FontFamily="FredokaOne" 
+                                   TextColor="#4BA8E0" />
+                                        <Label Text="{Binding Description}" 
+                                   Margin="0,5,0,5"
+                                   FontSize="12" 
+                                   FontFamily="FredokaOne" 
+                                   TextColor="#4BA8E0" />
+                                    </VerticalStackLayout>
+                                </Grid>
+                            </VerticalStackLayout>
+                        </syncfusion:SfCardView>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <!-- The Popup -->
+            <StackLayout x:Name="LocationPopup" BackgroundColor="Transparent" IsVisible="False" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
+                <Frame BackgroundColor="White" Padding="20" CornerRadius="10" HorizontalOptions="Center" VerticalOptions="Center">
+                    <StackLayout>
+                        <Label Text="Allow location access?" FontSize="Large" HorizontalOptions="Center"/>
+                        <Button Text="Yes" Clicked="OnAllowLocationClicked"/>
+                        <Button Text="No" Clicked="OnDenyLocationClicked"/>
+                    </StackLayout>
+                </Frame>
+            </StackLayout>
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>

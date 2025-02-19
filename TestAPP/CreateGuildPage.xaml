@@ -1,0 +1,164 @@
+﻿<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:TestAPP.ViewModels"
+             xmlns:local="clr-namespace:TestAPP.Converter"
+             x:Class="TestAPP.CreateGuildPage"
+              NavigationPage.HasBackButton="True"
+             Background="{StaticResource PageBackgroundGradient}">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <LinearGradientBrush x:Key="PageBackgroundGradient" StartPoint="0,0" EndPoint="0,1">
+                <GradientStop Color="#FFFFFF" Offset="0.0"/>
+                <GradientStop Color="#E7F0F5" Offset="1.0"/>
+            </LinearGradientBrush>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+
+    <ContentPage.BindingContext>
+        <vm:CreateGuildViewModel />
+    </ContentPage.BindingContext>
+
+    
+ 
+    <ScrollView>
+        
+        <VerticalStackLayout Padding="20" Spacing="10" Margin="0,0,0,100" >
+
+            <Label Text="Create Guild"
+               FontSize="24"
+               FontFamily="FredokaOne"
+               TextColor="#082C56"
+               HorizontalOptions="Center"
+               VerticalOptions="Center"
+               Padding="10"/>
+            <!-- Form Container -->
+            <Frame Padding="20"
+                   CornerRadius="20"
+                   BackgroundColor="Transparent"
+                   HasShadow="True"
+                   BorderColor="#D9D9D9">
+
+                <VerticalStackLayout Spacing="20" Padding="20" HorizontalOptions="Center">
+
+                    <!-- User Icon Centered -->
+                    <Frame Padding="10" 
+                           BackgroundColor="Transparent"
+                           CornerRadius="5"
+                           WidthRequest="80"
+                           HeightRequest="80"
+                           HorizontalOptions="Center">
+                        <Label Text="&#xf0c0;"  
+                               FontSize="35"
+                               FontFamily="FontAwesome"
+                               TextColor="#082C56"
+                               HorizontalOptions="Center"
+                               VerticalOptions="Center" />
+                    </Frame>
+
+                    <!-- Guild Name -->
+                    <Label Text="Guild Name"
+                           FontFamily="FredokaOne"
+                           TextColor="#082C56"
+                           HorizontalOptions="Start" />
+                    <Frame CornerRadius="20" Padding="5" BorderColor="#D9D9D9">
+                        <Entry Text="{Binding Name}"
+                               FontFamily="FredokaOne"
+                               TextColor="#082C56"
+                               BackgroundColor="Transparent"
+                               InputTransparent="True"
+                               Keyboard="Text"
+                               HorizontalOptions="FillAndExpand"/>
+                    </Frame>
+
+                    <!-- Location -->
+                    <Label Text="Location"
+       FontFamily="FredokaOne"
+       TextColor="#082C56"
+       HorizontalOptions="Start"/>
+                    <Frame CornerRadius="20" Padding="5" BorderColor="#D9D9D9">
+                        <Picker ItemsSource="{Binding LocationsList}"
+            SelectedItem="{Binding SelectedLocation, Mode=TwoWay}"
+            FontFamily="FredokaOne"
+            TextColor="#082C56"
+            Title="Select Location"
+            HorizontalOptions="FillAndExpand"/>
+                    </Frame>
+
+
+                    <!-- Equipment -->
+                    <Label Text="Equipment" 
+                           FontFamily="FredokaOne"
+                           TextColor="#082C56" 
+                           HorizontalOptions="Start"/>
+                    <FlexLayout BindableLayout.ItemsSource="{Binding EquipmentTags}"
+                                Wrap="Wrap"
+                                Direction="Row"
+                                JustifyContent="Start"
+                                AlignItems="Start">
+                        <BindableLayout.ItemTemplate>
+                            <DataTemplate>
+                                <Frame Padding="10"
+                                       CornerRadius="20"
+                                       
+                                       BackgroundColor="{Binding IsSelected, Converter={StaticResource SelectedColorConverter}}"
+                                       HasShadow="False">
+                                    <Label Text="{Binding Name}"
+                                           FontFamily="FredokaOne"
+                                           TextColor="Gray"
+                                           VerticalOptions="Center"
+                                           HorizontalOptions="Center" />
+                                </Frame>
+                            </DataTemplate>
+                        </BindableLayout.ItemTemplate>
+                    </FlexLayout>
+
+                    <!-- Description -->
+                    <Label Text="Details"
+                           FontFamily="FredokaOne"
+                           TextColor="#082C56"
+                           HorizontalOptions="Start"/>
+                    <Frame CornerRadius="20" Padding="5" BorderColor="#D9D9D9">
+                        <Editor Text="{Binding Description}"
+                                HeightRequest="50"
+                                FontFamily="FredokaOne"
+                                TextColor="#082C56"/>
+                    </Frame>
+
+                    <HorizontalStackLayout HorizontalOptions="Center" Spacing="100">
+                        <Label Text="Make Guild Private" 
+                               FontFamily="FredokaOne"
+                               TextColor="#082C56" />
+                        <Switch IsToggled="{Binding IsPrivate}" />
+                    </HorizontalStackLayout>
+
+
+                    <!-- Password (Visible if Private) -->
+                    <Frame CornerRadius="20" BorderColor="#D9D9D9"
+       Padding="5">
+                        <Entry Text="{Binding Password}"
+           IsPassword="True"
+           Placeholder="Enter password"
+           FontFamily="FredokaOne"
+           TextColor="#082C56"
+           IsVisible="{Binding IsPrivate}"/>
+                    </Frame>
+
+
+                    <!-- Create Button -->
+                    <Button Text="Create"
+                            Command="{Binding CreateGuildCommand}"
+                            BackgroundColor="#082C56"
+                            TextColor="White"
+                            FontFamily="FredokaOne"
+                            CornerRadius="20"
+                            HorizontalOptions="FillAndExpand"
+                            Margin="0,20,0,0"/>
+
+                </VerticalStackLayout>
+            </Frame>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

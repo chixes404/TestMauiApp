@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="TestAPP.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:TestAPP"
+    Shell.FlyoutBehavior="Disabled"
+    Shell.BackgroundColor="Transparent"
+    Shell.TabBarBackgroundColor="Transparent"
+    Shell.TabBarForegroundColor="#082C56"
+    Shell.TabBarUnselectedColor="#B0B0B0"
+    Shell.TabBarTitleColor="#082C56"
+    Title="TestAPP">
+
+    <!-- Define Bottom Navigation Tabs -->
+    <TabBar>
+        <Tab Icon="home.png" >
+            <ShellContent ContentTemplate="{DataTemplate local:MainPage}" />
+        </Tab>
+
+        <Tab  Icon="tasklist.png">
+            <ShellContent ContentTemplate="{DataTemplate local:GuildsPage}" />
+        </Tab>
+
+        <Tab Icon="user.png">
+            <ShellContent ContentTemplate="{DataTemplate local:CreateGuildPage}" />
+        </Tab>
+    </TabBar>
+
+    <!-- Fake Bottom Bar Background -->
+  
+
+</Shell>

@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Frame xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+       x:Class="TestAPP.Popup.LocationPermissionPopup"
+       Padding="20"
+       BackgroundColor="Transparent"
+       CornerRadius="10"
+       WidthRequest="300"
+       HeightRequest="200"
+       HorizontalOptions="Center"
+       VerticalOptions="Center"
+       HasShadow="True">
+    <StackLayout HorizontalOptions="Center" VerticalOptions="Center" Spacing="15">
+        <Label Text="Allow EZ LEVELUP 
+to access 
+your location?"
+               FontSize="18"
+               TextColor="#4BA8E0"
+       FontFamily="FredokaOne"
+               HorizontalOptions="Center"/>
+
+        <StackLayout Orientation="Horizontal" Spacing="20" HorizontalOptions="Center">
+            <Button Text="Yes"
+                    BackgroundColor="#082C56"
+                    TextColor="White"
+                    Clicked="OnAllowLocationClicked"/>
+
+            <Button Text="No"
+                    BackgroundColor="Gray"
+                    TextColor="White"
+                    Clicked="OnDenyLocationClicked"/>
+        </StackLayout>
+    </StackLayout>
+</Frame>
